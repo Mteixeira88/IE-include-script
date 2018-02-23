@@ -25,24 +25,19 @@ class ITM {
         let variableToMatch: string;
         this.browserDetect()
         this.containing = containing;
-        for (let i = 0; i < containing.length; i++) {
-            if (i === 0) {
-                variableToMatch = containing[i];
-            } else {
-                variableToMatch = variableToMatch + '|' + containing[i];
+        if (this.browser) {
+            for (let i = 0; i < containing.length; i++) {
+                if (variableToCompare.match(containing[i])) {
+                    return true;
+                }
+            }
+        } else {
+
+            if (this.containing.includes(variableToCompare)) {
+                return true;
             }
         }
-
-        if (this.browser) {
-            let myReg = new RegExp(variableToMatch + ".*");
-            if (variableToCompare.match(myReg)) {
-                return true;
-            };
-        }
-
-        if (this.containing.includes(variableToCompare)) {
-            return true;
-        };
         return false;
     }
 }
+
