@@ -1,5 +1,6 @@
 class ITM {
     private containing: any;
+    private browser: boolean = false;
 
     constructor() {
         //code goes here
@@ -12,7 +13,7 @@ class ITM {
             (/MSIE 10/i.test(navigator.userAgent)) ||
                 (/MSIE 9/i.test(navigator.userAgent) ||
                     /rv:11.0/i.test(navigator.userAgent))) {
-                return true
+                this.browser = true;
             }
     }
 
@@ -22,6 +23,7 @@ class ITM {
  */
     public includesToMatch(variableToCompare: string, containing: Array<string>) {
         let variableToMatch: string;
+        this.browserDetect()
         this.containing = containing;
         for (let i = 0; i < containing.length; i++) {
             if (i === 0) {
@@ -29,17 +31,18 @@ class ITM {
             } else {
                 variableToMatch = variableToMatch + '|' + containing[i];
             }
+        }
 
-            if (this.browserDetect()) {
-                if (variableToCompare.match('/^' + variableToMatch + '$/')) {
-                    return true;
-                };
-            }
-
-            if (this.containing.includes(variableToCompare)) {
+        if (this.browser) {
+            let myReg = new RegExp(variableToMatch + ".*");
+            if (variableToCompare.match(myReg)) {
                 return true;
             };
-            return false;
         }
+
+        if (this.containing.includes(variableToCompare)) {
+            return true;
+        };
+        return false;
     }
 }
