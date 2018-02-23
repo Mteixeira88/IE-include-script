@@ -32,7 +32,6 @@ class ITM {
                 }
             }
         } else {
-
             if (this.containing.includes(variableToCompare)) {
                 return true;
             }
