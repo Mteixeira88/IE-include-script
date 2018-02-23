@@ -1,6 +1,4 @@
-# Typescript Boilerplate
-
-Boilerplate for a Typescript project with SASS for CSS and Handlebars for HTML templating.
+# IE include script
 
 
 ## Fixes #
