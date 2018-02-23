@@ -32,16 +32,13 @@ class ITM {
 
             if (this.browserDetect()) {
                 if (variableToCompare.match('/^' + variableToMatch + '$/')) {
-                    alert('true');
                     return true;
                 };
             }
 
             if (this.containing.includes(variableToCompare)) {
-                alert('true');
                 return true;
             };
-            alert('false');
             return false;
         }
     }
