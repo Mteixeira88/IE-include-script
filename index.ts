@@ -1,16 +1,8 @@
 class ITM {
-    private variableToCompare: string;
-    private containing: any = {};
+    private containing: any;
 
-/**
- * [constructor - This constructor receives the following variables:]
- * @param {string} variableToCompare [This is the varaibale we want to compare]
- * @param {any}  containing        [This should be an array of values to compare with the variabaleToCompare]
- */
-    constructor(variableToCompare: string, containing: Array<string>) {
-        this.variableToCompare = variableToCompare;
-        this.containing = containing;
-        this.includesToMatch();
+    constructor() {
+        //code goes here
     }
 /**
  * [browserDetect - This method is to know when the user is using Internet Explorer]
@@ -28,24 +20,28 @@ class ITM {
  * [includesToMatch - Depending on the browser, this method compares your variables using the include or the match Javascript function,
  * enabling it to work with the last breakthrough tecnologies of ES]
  */
-    private includesToMatch() {
+    public includesToMatch(variableToCompare: string, containing: Array<string>) {
         let variableToMatch: string;
-        for (let i = 0; i < this.containing.length; i++) {
+        this.containing = containing;
+        for (let i = 0; i < containing.length; i++) {
             if (i === 0) {
-                variableToMatch = this.containing[i];
+                variableToMatch = containing[i];
             } else {
-                variableToMatch = variableToMatch + '|' + this.containing[i];
+                variableToMatch = variableToMatch + '|' + containing[i];
             }
 
             if (this.browserDetect()) {
-                if (this.variableToCompare.match('/^' + variableToMatch + '$/')) {
+                if (variableToCompare.match('/^' + variableToMatch + '$/')) {
+                    alert('true');
                     return true;
                 };
             }
 
-            if (this.containing.includes(this.variableToCompare)) {
+            if (this.containing.includes(variableToCompare)) {
+                alert('true');
                 return true;
             };
+            alert('false');
             return false;
         }
     }
